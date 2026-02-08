@@ -44,13 +44,17 @@ function formatDate(dateStr: string) {
 }
 
 .post-card {
-  padding: 24px 0;
-  border-bottom: 1px solid #f0f0f0;
-  transition: opacity 0.2s;
+  padding: 24px;
+  border-bottom: 2px solid #e6e6e6;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .post-card:hover {
-  opacity: 0.8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .post-cover {
@@ -78,9 +82,9 @@ function formatDate(dateStr: string) {
 }
 
 .post-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #1677ff;
+  font-size: 22px;
+  font-weight: 700;
+  color: #722ed1;
   margin: 0 0 8px;
   line-height: 1.4;
 }

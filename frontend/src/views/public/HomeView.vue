@@ -39,10 +39,11 @@ onMounted(() => {
 
 <style scoped>
 .page-heading {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800;
   margin: 0 0 32px;
-  color: #1a1a1a;
+  color: #722ed1;
+  letter-spacing: -0.5px;
 }
 
 .empty-state {
