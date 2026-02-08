@@ -1,17 +1,17 @@
 <template>
-  <router-link :to="`/post/${post.slug}`" class="post-card-link">
-    <div class="post-card">
-      <div v-if="post.coverImage" class="post-cover">
-        <img :src="post.coverImage" :alt="post.title" />
+  <router-link :to="`/post/${post.slug}`" class="no-underline text-inherit block">
+    <div class="py-6 border-b border-border-light transition-opacity duration-200 hover:opacity-80">
+      <div v-if="post.coverImage" class="mb-4 rounded-lg overflow-hidden">
+        <img :src="post.coverImage" :alt="post.title" class="w-full h-50 object-cover" />
       </div>
       <div class="post-info">
-        <div class="post-meta">
+        <div class="flex items-center gap-2 mb-2">
           <a-tag v-if="post.category" color="blue" :bordered="false">{{ post.category.name }}</a-tag>
-          <span class="post-date">{{ formatDateFull(post.publishedAt) }}</span>
+          <span class="text-[13px] text-text-muted">{{ formatDateFull(post.publishedAt) }}</span>
         </div>
-        <h3 class="post-title">{{ post.title }}</h3>
-        <p v-if="post.excerpt" class="post-excerpt">{{ post.excerpt }}</p>
-        <div v-if="post.tags?.length" class="post-tags">
+        <h3 class="text-xl font-semibold text-text-primary m-0 mb-2 leading-snug">{{ post.title }}</h3>
+        <p v-if="post.excerpt" class="text-text-secondary text-sm leading-relaxed m-0 mb-3">{{ post.excerpt }}</p>
+        <div v-if="post.tags?.length" class="flex gap-1 flex-wrap">
           <a-tag v-for="tag in post.tags" :key="tag.id" :bordered="false">{{ tag.name }}</a-tag>
         </div>
       </div>
@@ -29,66 +29,3 @@ defineProps<{
 
 const formatDateFull = (dateStr: string) => formatDate(dateStr, true)
 </script>
-
-<style scoped>
-.post-card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.post-card {
-  padding: 24px 0;
-  border-bottom: 1px solid #f0f0f0;
-  transition: opacity 0.2s;
-}
-
-.post-card:hover {
-  opacity: 0.8;
-}
-
-.post-cover {
-  margin-bottom: 16px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.post-cover img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.post-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.post-date {
-  font-size: 13px;
-  color: #999;
-}
-
-.post-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 8px;
-  line-height: 1.4;
-}
-
-.post-excerpt {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 12px;
-}
-
-.post-tags {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-</style>

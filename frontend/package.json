@@ -12,12 +12,14 @@
     "chromatic": "chromatic"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "ant-design-vue": "4.2.6",
     "axios": "^1.7.9",
     "highlight.js": "^11.11.1",
     "marked": "^11.2.0",
     "marked-highlight": "^2.2.1",
     "pinia": "2.1.7",
+    "tailwindcss": "^4.1.18",
     "vue": "^3.3.9",
     "vue-router": "^4.2.5"
   },

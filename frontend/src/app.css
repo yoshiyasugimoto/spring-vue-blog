@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "ant-design-vue/dist/reset.css";
+@import "./styles/markdown.css";
+
+@theme {
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666;
+  --color-text-muted: #999;
+  --color-text-dark: #333;
+  --color-border-light: #f0f0f0;
+  --color-bg-gray: #f5f5f5;
+  --color-bg-subtle: #fafafa;
+  --color-bg-code: #f6f8fa;
+  --color-bg-inline-code: #f0f0f0;
+  --color-border-medium: #d9d9d9;
+  --color-border-faint: #ddd;
+  --color-border-faintest: #eee;
+  --color-antd-blue: #1890ff;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif;
+  --font-mono: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

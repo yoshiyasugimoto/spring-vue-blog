@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="page-header">
-      <h2 class="page-title">記事管理</h2>
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold m-0">記事管理</h2>
       <router-link to="/admin/posts/new">
         <a-button type="primary">新規作成</a-button>
       </router-link>
@@ -88,18 +88,3 @@ onMounted(() => {
   postStore.fetchAll()
 })
 </script>
-
-<style scoped>
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-</style>

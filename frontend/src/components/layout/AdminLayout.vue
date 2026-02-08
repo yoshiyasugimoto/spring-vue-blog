@@ -1,15 +1,15 @@
 <template>
-  <a-layout class="admin-layout">
+  <a-layout class="min-h-screen">
     <a-layout-sider
       v-model:collapsed="collapsed"
       :trigger="null"
       collapsible
       theme="light"
       :width="220"
-      class="admin-sider"
+      class="!border-r !border-border-light"
     >
-      <div class="sider-logo">
-        <router-link to="/admin">Blog Admin</router-link>
+      <div class="h-14 flex items-center justify-center border-b border-border-light">
+        <router-link to="/admin" class="text-base font-bold text-text-primary no-underline">Blog Admin</router-link>
       </div>
       <a-menu
         v-model:selectedKeys="selectedKeys"
@@ -35,22 +35,22 @@
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header class="admin-header">
-        <div class="header-left">
+      <a-layout-header class="!bg-white !px-6 flex justify-between items-center !h-14 border-b border-border-light">
+        <div>
           <MenuFoldOutlined
             v-if="!collapsed"
-            class="trigger"
+            class="text-lg cursor-pointer transition-colors duration-300 hover:text-antd-blue"
             @click="collapsed = true"
           />
           <MenuUnfoldOutlined
             v-else
-            class="trigger"
+            class="text-lg cursor-pointer transition-colors duration-300 hover:text-antd-blue"
             @click="collapsed = false"
           />
         </div>
-        <div class="header-right">
+        <div>
           <a-dropdown>
-            <span class="user-info">
+            <span class="cursor-pointer text-sm">
               {{ authStore.user?.displayName || authStore.user?.username }}
             </span>
             <template #overlay>
@@ -68,7 +68,7 @@
           </a-dropdown>
         </div>
       </a-layout-header>
-      <a-layout-content class="admin-content">
+      <a-layout-content class="!p-6 !bg-bg-gray">
         <router-view />
       </a-layout-content>
     </a-layout>
@@ -128,58 +128,3 @@ async function handleLogout() {
   router.push('/login')
 }
 </script>
-
-<style scoped>
-.admin-layout {
-  min-height: 100vh;
-}
-
-.admin-sider {
-  border-right: 1px solid #f0f0f0;
-}
-
-.sider-logo {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.sider-logo a {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a1a1a;
-  text-decoration: none;
-}
-
-.admin-header {
-  background: #fff;
-  padding: 0 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 56px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.trigger {
-  font-size: 18px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.trigger:hover {
-  color: #1890ff;
-}
-
-.user-info {
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.admin-content {
-  padding: 24px;
-  background: #f5f5f5;
-}
-</style>

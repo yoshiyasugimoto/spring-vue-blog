@@ -1,7 +1,7 @@
 <template>
-  <div class="login-container">
-    <a-card class="login-card" :bordered="false">
-      <h2 class="login-title">ログイン</h2>
+  <div class="min-h-screen flex items-center justify-center bg-bg-gray">
+    <a-card class="w-100 shadow-[0_2px_8px_rgba(0,0,0,0.06)]" :bordered="false">
+      <h2 class="text-center mb-8 font-semibold text-2xl text-text-primary">ログイン</h2>
       <a-form
         :model="form"
         @finish="handleLogin"
@@ -71,26 +71,3 @@ async function handleLogin() {
   }
 }
 </script>
-
-<style scoped>
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f5f5f5;
-}
-
-.login-card {
-  width: 400px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.login-title {
-  text-align: center;
-  margin-bottom: 32px;
-  font-weight: 600;
-  font-size: 24px;
-  color: #1a1a1a;
-}
-</style>

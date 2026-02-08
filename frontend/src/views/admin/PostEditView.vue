@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="page-header">
-      <h2 class="page-title">{{ isEdit ? '記事を編集' : '新規記事' }}</h2>
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold m-0">{{ isEdit ? '記事を編集' : '新規記事' }}</h2>
       <a-space>
         <a-button @click="router.back()">戻る</a-button>
         <a-button @click="handleSave('DRAFT')" :loading="saving">下書き保存</a-button>
@@ -11,7 +11,7 @@
 
     <a-row :gutter="24">
       <a-col :span="18">
-        <a-card :bordered="false" style="margin-bottom: 24px">
+        <a-card :bordered="false" class="mb-6">
           <a-input
             v-model:value="form.title"
             placeholder="タイトルを入力..."
@@ -25,7 +25,7 @@
         </a-card>
       </a-col>
       <a-col :span="6">
-        <a-card title="設定" :bordered="false" style="margin-bottom: 16px">
+        <a-card title="設定" :bordered="false" class="mb-4">
           <a-form layout="vertical">
             <a-form-item label="スラッグ">
               <a-input v-model:value="form.slug" placeholder="url-slug" />
@@ -38,12 +38,12 @@
             </a-form-item>
           </a-form>
         </a-card>
-        <a-card title="カテゴリ" :bordered="false" style="margin-bottom: 16px">
+        <a-card title="カテゴリ" :bordered="false" class="mb-4">
           <a-select
             v-model:value="form.categoryId"
             placeholder="カテゴリを選択"
             allow-clear
-            style="width: 100%"
+            class="w-full"
           >
             <a-select-option v-for="cat in categories" :key="cat.id" :value="cat.id">
               {{ cat.name }}
@@ -55,7 +55,7 @@
             v-model:value="form.tagIds"
             mode="multiple"
             placeholder="タグを選択"
-            style="width: 100%"
+            class="w-full"
           >
             <a-select-option v-for="tag in tags" :key="tag.id" :value="tag.id">
               {{ tag.name }}
@@ -152,19 +152,6 @@ async function handleSave(status: string) {
 </script>
 
 <style scoped>
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-
 .title-input {
   font-size: 24px !important;
   font-weight: 600 !important;

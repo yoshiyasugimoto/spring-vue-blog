@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="page-header">
-      <h2 class="page-title">タグ管理</h2>
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold m-0">タグ管理</h2>
       <a-button type="primary" @click="showModal()">新規作成</a-button>
     </div>
     <a-card :bordered="false">
@@ -99,18 +99,3 @@ async function handleDelete(id: number) {
 
 onMounted(fetchTags)
 </script>
-
-<style scoped>
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-</style>

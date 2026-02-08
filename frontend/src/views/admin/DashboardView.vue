@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">ダッシュボード</h2>
+    <h2 class="mb-6 text-xl font-semibold">ダッシュボード</h2>
     <a-row :gutter="16">
       <a-col :span="8">
         <a-card>
@@ -18,7 +18,7 @@
         </a-card>
       </a-col>
     </a-row>
-    <a-card style="margin-top: 24px">
+    <a-card class="mt-6">
       <template #title>最近の記事</template>
       <template #extra>
         <router-link to="/admin/posts">
@@ -79,11 +79,3 @@ onMounted(async () => {
   }
 })
 </script>
-
-<style scoped>
-.page-title {
-  margin-bottom: 24px;
-  font-size: 20px;
-  font-weight: 600;
-}
-</style>

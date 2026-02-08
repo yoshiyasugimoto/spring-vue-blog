@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/vue3';
 import { setup } from '@storybook/vue3';
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
+import '../src/app.css';
 import { createPinia } from 'pinia';
 import { createRouter, createMemoryHistory } from 'vue-router';
 
