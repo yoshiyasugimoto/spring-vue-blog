@@ -78,9 +78,9 @@ function formatDate(dateStr: string) {
 }
 
 .post-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #1677ff;
   margin: 0 0 8px;
   line-height: 1.4;
 }
