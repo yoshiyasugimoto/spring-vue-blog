@@ -22,10 +22,10 @@ public class TagService {
     @Transactional
     public Tag create(TagRequest request) {
         Tag tag = new Tag();
-        tag.setName(request.getName());
-        String slug = request.getSlug();
+        tag.setName(request.name());
+        String slug = request.slug();
         if (slug == null || slug.isBlank()) {
-            slug = request.getName()
+            slug = request.name()
                     .toLowerCase()
                     .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
                     .replaceAll("^-|-$", "");

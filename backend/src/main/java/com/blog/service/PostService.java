@@ -52,26 +52,26 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Post post = new Post();
-        post.setTitle(request.getTitle());
+        post.setTitle(request.title());
         post.setSlug(generateSlug(request));
-        post.setContent(request.getContent());
-        post.setExcerpt(request.getExcerpt());
-        post.setCoverImage(request.getCoverImage());
-        post.setStatus(request.getStatus());
+        post.setContent(request.content());
+        post.setExcerpt(request.excerpt());
+        post.setCoverImage(request.coverImage());
+        post.setStatus(request.status());
         post.setAuthor(author);
 
-        if (request.getCategoryId() != null) {
-            Category category = categoryRepository.findById(request.getCategoryId())
+        if (request.categoryId() != null) {
+            Category category = categoryRepository.findById(request.categoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
             post.setCategory(category);
         }
 
-        if (request.getTagIds() != null && !request.getTagIds().isEmpty()) {
-            Set<Tag> tags = tagRepository.findByIdIn(request.getTagIds());
+        if (request.tagIds() != null && !request.tagIds().isEmpty()) {
+            Set<Tag> tags = tagRepository.findByIdIn(request.tagIds());
             post.setTags(tags);
         }
 
-        if ("PUBLISHED".equals(request.getStatus())) {
+        if ("PUBLISHED".equals(request.status())) {
             post.setPublishedAt(LocalDateTime.now());
         }
 
@@ -82,31 +82,31 @@ public class PostService {
     public Post update(Long id, PostRequest request) {
         Post post = findById(id);
 
-        post.setTitle(request.getTitle());
-        if (request.getSlug() != null && !request.getSlug().isBlank()) {
-            post.setSlug(request.getSlug());
+        post.setTitle(request.title());
+        if (request.slug() != null && !request.slug().isBlank()) {
+            post.setSlug(request.slug());
         }
-        post.setContent(request.getContent());
-        post.setExcerpt(request.getExcerpt());
-        post.setCoverImage(request.getCoverImage());
+        post.setContent(request.content());
+        post.setExcerpt(request.excerpt());
+        post.setCoverImage(request.coverImage());
 
-        if ("PUBLISHED".equals(request.getStatus()) && !"PUBLISHED".equals(post.getStatus())) {
+        if ("PUBLISHED".equals(request.status()) && !"PUBLISHED".equals(post.getStatus())) {
             post.setPublishedAt(LocalDateTime.now());
         }
-        post.setStatus(request.getStatus());
+        post.setStatus(request.status());
 
-        if (request.getCategoryId() != null) {
-            Category category = categoryRepository.findById(request.getCategoryId())
+        if (request.categoryId() != null) {
+            Category category = categoryRepository.findById(request.categoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
             post.setCategory(category);
         } else {
             post.setCategory(null);
         }
 
-        if (request.getTagIds() != null) {
-            Set<Tag> tags = request.getTagIds().isEmpty()
+        if (request.tagIds() != null) {
+            Set<Tag> tags = request.tagIds().isEmpty()
                     ? new HashSet<>()
-                    : tagRepository.findByIdIn(request.getTagIds());
+                    : tagRepository.findByIdIn(request.tagIds());
             post.setTags(tags);
         }
 
@@ -119,9 +119,9 @@ public class PostService {
     }
 
     private String generateSlug(PostRequest request) {
-        String slug = request.getSlug();
+        String slug = request.slug();
         if (slug == null || slug.isBlank()) {
-            slug = request.getTitle()
+            slug = request.title()
                     .toLowerCase()
                     .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
                     .replaceAll("^-|-$", "");

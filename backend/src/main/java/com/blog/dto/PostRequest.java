@@ -1,21 +1,22 @@
 package com.blog.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Set;
 
-@Getter
-@Setter
-public class PostRequest {
-    @NotBlank
-    private String title;
-    private String slug;
-    private String content;
-    private String excerpt;
-    private String coverImage;
-    private String status = "DRAFT";
-    private Long categoryId;
-    private Set<Long> tagIds;
+public record PostRequest(
+        @NotBlank String title,
+        String slug,
+        String content,
+        String excerpt,
+        String coverImage,
+        String status,
+        Long categoryId,
+        Set<Long> tagIds
+) {
+    public PostRequest {
+        if (status == null) {
+            status = "DRAFT";
+        }
+    }
 }

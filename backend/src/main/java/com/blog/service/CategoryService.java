@@ -27,20 +27,20 @@ public class CategoryService {
     @Transactional
     public Category create(CategoryRequest request) {
         Category category = new Category();
-        category.setName(request.getName());
+        category.setName(request.name());
         category.setSlug(generateSlug(request));
-        category.setDescription(request.getDescription());
+        category.setDescription(request.description());
         return categoryRepository.save(category);
     }
 
     @Transactional
     public Category update(Long id, CategoryRequest request) {
         Category category = findById(id);
-        category.setName(request.getName());
-        if (request.getSlug() != null && !request.getSlug().isBlank()) {
-            category.setSlug(request.getSlug());
+        category.setName(request.name());
+        if (request.slug() != null && !request.slug().isBlank()) {
+            category.setSlug(request.slug());
         }
-        category.setDescription(request.getDescription());
+        category.setDescription(request.description());
         return categoryRepository.save(category);
     }
 
@@ -50,9 +50,9 @@ public class CategoryService {
     }
 
     private String generateSlug(CategoryRequest request) {
-        String slug = request.getSlug();
+        String slug = request.slug();
         if (slug == null || slug.isBlank()) {
-            slug = request.getName()
+            slug = request.name()
                     .toLowerCase()
                     .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
                     .replaceAll("^-|-$", "");

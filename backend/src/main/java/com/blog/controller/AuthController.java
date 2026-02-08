@@ -31,7 +31,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.username(), request.password())
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -41,7 +41,7 @@ public class AuthController {
                 SecurityContextHolder.getContext()
         );
 
-        User user = userService.findByUsername(request.getUsername());
+        User user = userService.findByUsername(request.username());
         return ResponseEntity.ok(UserResponse.from(user));
     }
 
