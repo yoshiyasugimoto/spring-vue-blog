@@ -35,6 +35,16 @@ services:
     depends_on:
       - backend
 
+  backend-test:
+    image: gradle:8.12-jdk21
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - gradle_cache:/home/gradle/.gradle
+    command: gradle test --no-daemon
+    profiles:
+      - test
+
   storybook:
     build:
       context: ./frontend
@@ -49,3 +59,4 @@ services:
 
 volumes:
   mysql_data:
+  gradle_cache:
