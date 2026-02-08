@@ -29,6 +29,10 @@ setup((app) => {
 
 const preview: Preview = {
   parameters: {
+    chromatic: {
+      pauseAnimationAtEnd: true,
+      diffThreshold: 0.063,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -2,3 +2,9 @@ node_modules/
 dist/
 .vite/
 *.local
+
+# Chromatic
+build-storybook.log
+chromatic.log
+chromatic-build-*.xml
+chromatic-diagnostics.json

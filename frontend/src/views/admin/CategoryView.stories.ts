@@ -21,6 +21,9 @@ export const Empty: Story = {
 
 export const WithModalOpen: Story = {
   decorators: [withMockedApis()],
+  parameters: {
+    chromatic: { delay: 800 },
+  },
   play: async ({ canvasElement }) => {
     await new Promise((resolve) => setTimeout(resolve, 500));
     const btn = Array.from(canvasElement.querySelectorAll('button')).find(

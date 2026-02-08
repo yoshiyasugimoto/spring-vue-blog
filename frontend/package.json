@@ -8,7 +8,8 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic"
   },
   "dependencies": {
     "ant-design-vue": "4.2.6",
@@ -21,9 +22,11 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.0",
     "@storybook/vue3": "^10.2.4",
     "@storybook/vue3-vite": "^10.2.4",
     "@vitejs/plugin-vue": "^5.2.1",
+    "chromatic": "^15.0.0",
     "storybook": "^10.2.4",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",

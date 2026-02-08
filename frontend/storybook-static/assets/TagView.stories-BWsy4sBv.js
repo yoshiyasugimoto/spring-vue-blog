@@ -1,0 +1,19 @@
+import{d as G,k as J,l as K,f as A,c as a,b as t,j as d,r as s,n as Q,o as x,g as C,a as R,m as X,p as g}from"./iframe-C3jG6tCW.js";import{t as v,w as O,e as Y}from"./decorators-Blxr28FJ.js";import{_ as Z}from"./_plugin-vue_export-helper-DlAUqK2U.js";import"./preload-helper-Dp1pzeXC.js";import"./data-BUIPDpdg.js";const ee={class:"page-header"},U=G({__name:"TagView",setup(y){const i=d([]),r=d(!1),l=d(!1),f=d(!1),q=[{title:"名前",dataIndex:"name",key:"name"},{title:"スラッグ",dataIndex:"slug",key:"slug"},{title:"操作",key:"actions",width:100}],o=Q({name:"",slug:""});function D(){o.name="",o.slug="",l.value=!0}async function _(){r.value=!0;try{const c=await v.getAll();i.value=c.data}finally{r.value=!1}}async function P(){if(!o.name.trim()){g.warning("名前を入力してください");return}f.value=!0;try{await v.create(o),g.success("タグを作成しました"),l.value=!1,_()}finally{f.value=!1}}async function W(c){await v.delete(c),g.success("タグを削除しました"),_()}return J(_),(c,e)=>{const w=s("a-button"),$=s("a-popconfirm"),j=s("a-table"),z=s("a-card"),k=s("a-input"),b=s("a-form-item"),F=s("a-form"),H=s("a-modal");return x(),K("div",null,[A("div",ee,[e[5]||(e[5]=A("h2",{class:"page-title"},"タグ管理",-1)),a(w,{type:"primary",onClick:e[0]||(e[0]=n=>D())},{default:t(()=>[...e[4]||(e[4]=[C("新規作成",-1)])]),_:1})]),a(z,{bordered:!1},{default:t(()=>[a(j,{"data-source":i.value,loading:r.value,columns:q,"row-key":"id",pagination:!1},{bodyCell:t(({column:n,record:L})=>[n.key==="actions"?(x(),R($,{key:0,title:"削除しますか？",onConfirm:te=>W(L.id)},{default:t(()=>[a(w,{type:"link",danger:"",size:"small"},{default:t(()=>[...e[6]||(e[6]=[C("削除",-1)])]),_:1})]),_:1},8,["onConfirm"])):X("",!0)]),_:1},8,["data-source","loading"])]),_:1}),a(H,{open:l.value,"onUpdate:open":e[3]||(e[3]=n=>l.value=n),title:"タグを作成",onOk:P,"confirm-loading":f.value},{default:t(()=>[a(F,{layout:"vertical"},{default:t(()=>[a(b,{label:"名前",required:""},{default:t(()=>[a(k,{value:o.name,"onUpdate:value":e[1]||(e[1]=n=>o.name=n)},null,8,["value"])]),_:1}),a(b,{label:"スラッグ"},{default:t(()=>[a(k,{value:o.slug,"onUpdate:value":e[2]||(e[2]=n=>o.slug=n),placeholder:"auto-generated"},null,8,["value"])]),_:1})]),_:1})]),_:1},8,["open","confirm-loading"])])}}}),ae=Z(U,[["__scopeId","data-v-09106e4b"]]);U.__docgenInfo={exportName:"default",displayName:"TagView",description:"",tags:{},sourceFiles:["/Users/sugimotoyoshiwataru/ai-driven-repository/spring-vue-blog/frontend/src/views/admin/TagView.vue"]};const ie={title:"Views/Admin/Tag",component:ae,tags:["autodocs"]},m={decorators:[O()]},u={decorators:[Y()]},p={decorators:[O()],parameters:{chromatic:{delay:800}},play:async({canvasElement:y})=>{await new Promise(r=>setTimeout(r,500));const i=Array.from(y.querySelectorAll("button")).find(r=>{var l;return(l=r.textContent)==null?void 0:l.includes("新規作成")});i&&i.click()}};var M,T,V;m.parameters={...m.parameters,docs:{...(M=m.parameters)==null?void 0:M.docs,source:{originalSource:`{
+  decorators: [withMockedApis()]
+}`,...(V=(T=m.parameters)==null?void 0:T.docs)==null?void 0:V.source}}};var E,h,N;u.parameters={...u.parameters,docs:{...(E=u.parameters)==null?void 0:E.docs,source:{originalSource:`{
+  decorators: [withMockedEmptyApis()]
+}`,...(N=(h=u.parameters)==null?void 0:h.docs)==null?void 0:N.source}}};var S,B,I;p.parameters={...p.parameters,docs:{...(S=p.parameters)==null?void 0:S.docs,source:{originalSource:`{
+  decorators: [withMockedApis()],
+  parameters: {
+    chromatic: {
+      delay: 800
+    }
+  },
+  play: async ({
+    canvasElement
+  }) => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const btn = Array.from(canvasElement.querySelectorAll('button')).find(el => el.textContent?.includes('新規作成')) as HTMLButtonElement;
+    if (btn) btn.click();
+  }
+}`,...(I=(B=p.parameters)==null?void 0:B.docs)==null?void 0:I.source}}};const ce=["Default","Empty","WithModalOpen"];export{m as Default,u as Empty,p as WithModalOpen,ce as __namedExportsOrder,ie as default};

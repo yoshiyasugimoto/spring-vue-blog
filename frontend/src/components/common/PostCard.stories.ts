@@ -22,7 +22,8 @@ const mockPost: Post = {
   slug: 'vue3-typescript-modern-frontend',
   content: 'コンテンツ本文...',
   excerpt: 'この記事では、Vue 3とTypeScriptを使用した最新のフロントエンド開発手法について解説します。',
-  coverImage: 'https://picsum.photos/800/400',
+  coverImage:
+    'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><rect fill="%23ccc" width="800" height="400"/></svg>',
   status: 'PUBLISHED',
   category: {
     id: 1,
