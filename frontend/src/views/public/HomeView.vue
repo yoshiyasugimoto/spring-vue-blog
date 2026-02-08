@@ -42,10 +42,10 @@ onMounted(() => {
 
 <style scoped>
 .page-heading {
-	font-size: 32px;
+	font-size: 40px;
 	font-weight: 800;
 	margin: 0 0 32px;
-	color: #722ed1;
+	color: #ff4d4f;
 	letter-spacing: -0.5px;
 }
 

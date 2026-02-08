@@ -49,10 +49,10 @@ function formatDate(dateStr: string) {
 
 .post-card {
 	padding: 24px;
-	border-bottom: 2px solid #e6e6e6;
+	border-bottom: 2px solid #ff4d4f;
 	border-radius: 12px;
 	margin-bottom: 16px;
-	background: #fafafa;
+	background: #fff0f0;
 	transition:
 		box-shadow 0.2s,
 		transform 0.2s;
