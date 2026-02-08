@@ -2,7 +2,9 @@ package com.blog.service;
 
 import com.blog.dto.CategoryRequest;
 import com.blog.entity.Category;
+import com.blog.exception.ResourceNotFoundException;
 import com.blog.repository.CategoryRepository;
+import com.blog.util.SlugUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,14 +23,14 @@ public class CategoryService {
 
     public Category findById(Long id) {
         return categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Category", id));
     }
 
     @Transactional
     public Category create(CategoryRequest request) {
         Category category = new Category();
         category.setName(request.name());
-        category.setSlug(generateSlug(request));
+        category.setSlug(SlugUtil.generate(request.name(), request.slug(), categoryRepository::existsBySlug));
         category.setDescription(request.description());
         return categoryRepository.save(category);
     }
@@ -47,19 +49,5 @@ public class CategoryService {
     @Transactional
     public void delete(Long id) {
         categoryRepository.deleteById(id);
-    }
-
-    private String generateSlug(CategoryRequest request) {
-        String slug = request.slug();
-        if (slug == null || slug.isBlank()) {
-            slug = request.name()
-                    .toLowerCase()
-                    .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
-                    .replaceAll("^-|-$", "");
-        }
-        if (categoryRepository.existsBySlug(slug)) {
-            slug = slug + "-" + System.currentTimeMillis();
-        }
-        return slug;
     }
 }

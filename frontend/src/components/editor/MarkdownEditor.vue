@@ -18,9 +18,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Marked } from 'marked'
-import { markedHighlight } from 'marked-highlight'
-import hljs from 'highlight.js'
+import { marked } from '@/utils/markdown'
 import 'highlight.js/styles/github.css'
 
 const props = defineProps<{
@@ -30,18 +28,6 @@ const props = defineProps<{
 defineEmits<{
   'update:modelValue': [value: string]
 }>()
-
-const marked = new Marked(
-  markedHighlight({
-    langPrefix: 'hljs language-',
-    highlight(code: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(code, { language: lang }).value
-      }
-      return hljs.highlightAuto(code).value
-    },
-  })
-)
 
 const renderedHtml = computed(() => {
   if (!props.modelValue) return '<p style="color: #999;">プレビューがここに表示されます</p>'

@@ -1,11 +1,12 @@
 services:
   db:
     image: mysql:8.0
+    env_file: .env
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: blog
-      MYSQL_USER: blog
-      MYSQL_PASSWORD: blogpassword
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -23,10 +24,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    env_file: .env
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/blog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo
-      SPRING_DATASOURCE_USERNAME: blog
-      SPRING_DATASOURCE_PASSWORD: blogpassword
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
 
   frontend:
     build: ./frontend

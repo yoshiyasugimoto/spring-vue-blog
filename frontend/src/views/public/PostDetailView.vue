@@ -8,7 +8,7 @@
               <a-tag v-if="postStore.currentPost.category" color="blue" :bordered="false">
                 {{ postStore.currentPost.category.name }}
               </a-tag>
-              <span class="post-date">{{ formatDate(postStore.currentPost.publishedAt) }}</span>
+              <span class="post-date">{{ formatDateFull(postStore.currentPost.publishedAt) }}</span>
             </div>
             <h1 class="post-title">{{ postStore.currentPost.title }}</h1>
             <div class="post-author" v-if="postStore.currentPost.author">
@@ -41,39 +41,19 @@
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePostStore } from '@/stores/post'
-import { Marked } from 'marked'
-import { markedHighlight } from 'marked-highlight'
-import hljs from 'highlight.js'
+import { marked } from '@/utils/markdown'
+import { formatDate } from '@/utils/date'
 import 'highlight.js/styles/github.css'
 
 const route = useRoute()
 const postStore = usePostStore()
-
-const marked = new Marked(
-  markedHighlight({
-    langPrefix: 'hljs language-',
-    highlight(code: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(code, { language: lang }).value
-      }
-      return hljs.highlightAuto(code).value
-    },
-  })
-)
 
 const renderedContent = computed(() => {
   if (!postStore.currentPost?.content) return ''
   return marked.parse(postStore.currentPost.content) as string
 })
 
-function formatDate(dateStr: string) {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
+const formatDateFull = (dateStr: string) => formatDate(dateStr, true)
 
 onMounted(() => {
   const slug = route.params.slug as string

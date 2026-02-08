@@ -7,7 +7,7 @@
       <div class="post-info">
         <div class="post-meta">
           <a-tag v-if="post.category" color="blue" :bordered="false">{{ post.category.name }}</a-tag>
-          <span class="post-date">{{ formatDate(post.publishedAt) }}</span>
+          <span class="post-date">{{ formatDateFull(post.publishedAt) }}</span>
         </div>
         <h3 class="post-title">{{ post.title }}</h3>
         <p v-if="post.excerpt" class="post-excerpt">{{ post.excerpt }}</p>
@@ -21,19 +21,13 @@
 
 <script setup lang="ts">
 import type { Post } from '@/types'
+import { formatDate } from '@/utils/date'
 
 defineProps<{
   post: Post
 }>()
 
-function formatDate(dateStr: string) {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
+const formatDateFull = (dateStr: string) => formatDate(dateStr, true)
 </script>
 
 <style scoped>

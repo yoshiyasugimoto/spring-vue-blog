@@ -10,6 +10,10 @@ export const postApi = {
     return apiClient.get<Post>(`/api/posts/${slug}`)
   },
 
+  getById(id: number) {
+    return apiClient.get<Post>(`/api/admin/posts/${id}`)
+  },
+
   getAll(page = 0, size = 10) {
     return apiClient.get<PageResponse<Post>>('/api/admin/posts', { params: { page, size } })
   },

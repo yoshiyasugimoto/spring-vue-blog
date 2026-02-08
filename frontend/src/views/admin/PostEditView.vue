@@ -103,18 +103,16 @@ onMounted(async () => {
 
   if (isEdit.value) {
     const id = Number(route.params.id)
-    const res = await postApi.getAll(0, 1000)
-    const post = res.data.content.find((p) => p.id === id)
-    if (post) {
-      form.title = post.title
-      form.slug = post.slug
-      form.content = post.content || ''
-      form.excerpt = post.excerpt || ''
-      form.coverImage = post.coverImage || ''
-      form.status = post.status
-      form.categoryId = post.category?.id || null
-      form.tagIds = post.tags?.map((t) => t.id) || []
-    }
+    const res = await postApi.getById(id)
+    const post = res.data
+    form.title = post.title
+    form.slug = post.slug
+    form.content = post.content || ''
+    form.excerpt = post.excerpt || ''
+    form.coverImage = post.coverImage || ''
+    form.status = post.status
+    form.categoryId = post.category?.id || null
+    form.tagIds = post.tags?.map((t) => t.id) || []
   }
 })
 

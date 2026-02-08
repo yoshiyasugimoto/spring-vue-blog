@@ -13,7 +13,7 @@ public record UserResponse(
                 user.getId(),
                 user.getUsername(),
                 user.getDisplayName(),
-                user.getRole()
+                user.getRole().name()
         );
     }
 }

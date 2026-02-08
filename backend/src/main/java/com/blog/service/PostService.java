@@ -3,12 +3,15 @@ package com.blog.service;
 import com.blog.dto.PostRequest;
 import com.blog.entity.Category;
 import com.blog.entity.Post;
+import com.blog.entity.PostStatus;
 import com.blog.entity.Tag;
 import com.blog.entity.User;
+import com.blog.exception.ResourceNotFoundException;
 import com.blog.repository.CategoryRepository;
 import com.blog.repository.PostRepository;
 import com.blog.repository.TagRepository;
 import com.blog.repository.UserRepository;
+import com.blog.util.SlugUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +37,7 @@ public class PostService {
 
     public Post findPublishedBySlug(String slug) {
         return postRepository.findPublishedBySlug(slug)
-                .orElseThrow(() -> new RuntimeException("Post not found: " + slug));
+                .orElseThrow(() -> new ResourceNotFoundException("Post", slug));
     }
 
     public Page<Post> findAll(Pageable pageable) {
@@ -43,17 +46,17 @@ public class PostService {
 
     public Post findById(Long id) {
         return postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Post", id));
     }
 
     @Transactional
     public Post create(PostRequest request, String username) {
         User author = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User", username));
 
         Post post = new Post();
         post.setTitle(request.title());
-        post.setSlug(generateSlug(request));
+        post.setSlug(SlugUtil.generate(request.title(), request.slug(), postRepository::existsBySlug));
         post.setContent(request.content());
         post.setExcerpt(request.excerpt());
         post.setCoverImage(request.coverImage());
@@ -62,7 +65,7 @@ public class PostService {
 
         if (request.categoryId() != null) {
             Category category = categoryRepository.findById(request.categoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category", request.categoryId()));
             post.setCategory(category);
         }
 
@@ -71,7 +74,7 @@ public class PostService {
             post.setTags(tags);
         }
 
-        if ("PUBLISHED".equals(request.status())) {
+        if (request.status() == PostStatus.PUBLISHED) {
             post.setPublishedAt(LocalDateTime.now());
         }
 
@@ -90,14 +93,14 @@ public class PostService {
         post.setExcerpt(request.excerpt());
         post.setCoverImage(request.coverImage());
 
-        if ("PUBLISHED".equals(request.status()) && !"PUBLISHED".equals(post.getStatus())) {
+        if (request.status() == PostStatus.PUBLISHED && post.getStatus() != PostStatus.PUBLISHED) {
             post.setPublishedAt(LocalDateTime.now());
         }
         post.setStatus(request.status());
 
         if (request.categoryId() != null) {
             Category category = categoryRepository.findById(request.categoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category", request.categoryId()));
             post.setCategory(category);
         } else {
             post.setCategory(null);
@@ -116,19 +119,5 @@ public class PostService {
     @Transactional
     public void delete(Long id) {
         postRepository.deleteById(id);
-    }
-
-    private String generateSlug(PostRequest request) {
-        String slug = request.slug();
-        if (slug == null || slug.isBlank()) {
-            slug = request.title()
-                    .toLowerCase()
-                    .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
-                    .replaceAll("^-|-$", "");
-        }
-        if (postRepository.existsBySlug(slug)) {
-            slug = slug + "-" + System.currentTimeMillis();
-        }
-        return slug;
     }
 }

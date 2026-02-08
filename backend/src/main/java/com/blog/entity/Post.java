@@ -37,8 +37,9 @@ public class Post {
     @Column(name = "cover_image", length = 500)
     private String coverImage;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private String status = "DRAFT";
+    private PostStatus status = PostStatus.DRAFT;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

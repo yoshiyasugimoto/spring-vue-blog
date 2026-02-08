@@ -3,6 +3,7 @@ package com.blog.service;
 import com.blog.dto.TagRequest;
 import com.blog.entity.Tag;
 import com.blog.repository.TagRepository;
+import com.blog.util.SlugUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,14 +24,7 @@ public class TagService {
     public Tag create(TagRequest request) {
         Tag tag = new Tag();
         tag.setName(request.name());
-        String slug = request.slug();
-        if (slug == null || slug.isBlank()) {
-            slug = request.name()
-                    .toLowerCase()
-                    .replaceAll("[^a-z0-9\\u3040-\\u9faf]+", "-")
-                    .replaceAll("^-|-$", "");
-        }
-        tag.setSlug(slug);
+        tag.setSlug(SlugUtil.generate(request.name(), request.slug(), s -> tagRepository.findBySlug(s).isPresent()));
         return tagRepository.save(tag);
     }
 

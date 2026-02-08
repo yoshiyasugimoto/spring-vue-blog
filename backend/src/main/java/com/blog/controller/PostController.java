@@ -35,6 +35,12 @@ public class PostController {
         return ResponseEntity.ok(PostResponse.from(post));
     }
 
+    @GetMapping("/api/admin/posts/{id}")
+    public ResponseEntity<PostResponse> getById(@PathVariable Long id) {
+        Post post = postService.findById(id);
+        return ResponseEntity.ok(PostResponse.from(post));
+    }
+
     @GetMapping("/api/admin/posts")
     public ResponseEntity<Page<PostResponse>> getAll(
             @RequestParam(defaultValue = "0") int page,

@@ -55,6 +55,7 @@
 import { computed, onMounted } from 'vue'
 import { usePostStore } from '@/stores/post'
 import { message } from 'ant-design-vue'
+import { formatDate } from '@/utils/date'
 
 const postStore = usePostStore()
 
@@ -72,11 +73,6 @@ const pagination = computed(() => ({
   pageSize: 10,
   showSizeChanger: false,
 }))
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString('ja-JP')
-}
 
 function handleTableChange(pag: { current: number }) {
   postStore.fetchAll(pag.current - 1)

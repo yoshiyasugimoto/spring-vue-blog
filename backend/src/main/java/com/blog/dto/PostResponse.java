@@ -1,6 +1,7 @@
 package com.blog.dto;
 
 import com.blog.entity.Post;
+import com.blog.entity.PostStatus;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -13,7 +14,7 @@ public record PostResponse(
     String content,
     String excerpt,
     String coverImage,
-    String status,
+    PostStatus status,
     CategoryResponse category,
     UserResponse author,
     Set<TagResponse> tags,

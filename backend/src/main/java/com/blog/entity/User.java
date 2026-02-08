@@ -29,8 +29,9 @@ public class User {
     @Column(name = "display_name", length = 100)
     private String displayName;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private String role = "EDITOR";
+    private UserRole role = UserRole.EDITOR;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

@@ -51,16 +51,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { postApi, categoryApi, tagApi } from '@/api/post'
+import { formatDate } from '@/utils/date'
 import type { Post } from '@/types'
 
 const stats = ref({ posts: 0, categories: 0, tags: 0 })
 const recentPosts = ref<Post[]>([])
 const loading = ref(false)
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString('ja-JP')
-}
 
 onMounted(async () => {
   loading.value = true
@@ -76,6 +72,8 @@ onMounted(async () => {
       categories: categoriesRes.data.length,
       tags: tagsRes.data.length,
     }
+  } catch {
+    // Error toast is shown by the API client interceptor
   } finally {
     loading.value = false
   }
