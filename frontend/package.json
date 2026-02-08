@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "ant-design-vue": "4.2.6",
@@ -19,7 +21,10 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@storybook/vue3": "^10.2.4",
+    "@storybook/vue3-vite": "^10.2.4",
     "@vitejs/plugin-vue": "^5.2.1",
+    "storybook": "^10.2.4",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
     "vue-tsc": "^2.2.0"

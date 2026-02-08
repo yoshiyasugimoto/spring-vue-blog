@@ -30,6 +30,30 @@ public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
 
+    /**
+     * Spring SecurityのHTTPセキュリティフィルタチェーンを構成するBean定義メソッド。
+     *
+     * <p>以下のセキュリティ設定を行う：</p>
+     *
+     * <ul>
+     *   <li><b>CORS設定:</b> {@link #corsConfigurationSource()} で定義されたCORSポリシーを適用する。</li>
+     *   <li><b>CSRF設定:</b> CookieベースのCSRFトークンリポジトリを使用し、
+     *       クライアント側（JavaScript）からトークンを読み取れるようHttpOnlyをfalseに設定する。
+     *       {@link CsrfTokenRequestAttributeHandler} のリクエスト属性名をnullに設定することで、
+     *       CSRFトークンの遅延解決（deferred loading）を無効化し、即時検証を行う。</li>
+     *   <li><b>認可ルール:</b>
+     *     <ul>
+     *       <li>GET /api/posts/**, /api/categories/**, /api/tags/** — 認証不要（公開API）</li>
+     *       <li>POST /api/auth/login — 認証不要（ログインエンドポイント）</li>
+     *       <li>GET /api/auth/me — 認証不要（現在のユーザー情報取得）</li>
+     *       <li>/api/admin/** — 認証必須（管理者用エンドポイント）</li>
+     *       <li>その他のリクエスト — 認証不要</li>
+     *     </ul>
+     *   </li>
+     *   <li><b>例外ハンドリング:</b> 未認証ユーザーが認証必須エンドポイントにアクセスした場合、
+     *       401 Unauthorizedレスポンスを返す。</li>
+     * </ul>
+     **/
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
